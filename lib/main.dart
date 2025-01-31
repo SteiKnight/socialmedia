@@ -5,7 +5,6 @@ import 'package:socialmedia/firebase_options.dart';
 import 'package:socialmedia/services/auth/auth_gate.dart';
 import 'package:socialmedia/themes/theme_provider.dart';
 
-import 'pages/login_page.dart';
 
 void main() async {
   //initialize firebase
