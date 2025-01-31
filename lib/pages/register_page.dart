@@ -22,7 +22,16 @@ class RegisterPage extends StatelessWidget {
 
       //signIn
       try {
-        await authService.signIn(emailController.text, pwController.text);
+        if (pwController.text != confirmPwController.text) {
+          return showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              title: Text("Passwords do not match"),
+            ),
+          );
+        } else {
+          await authService.register(emailController.text, pwController.text);
+        }
       } catch (e) {
         return showDialog(
           context: context,
