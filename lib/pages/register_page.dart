@@ -3,19 +3,20 @@ import 'package:socialmedia/components/my_button.dart';
 import 'package:socialmedia/components/my_input_box.dart';
 import 'package:socialmedia/services/auth/auth_service.dart';
 
-class LoginPage extends StatelessWidget {
+class RegisterPage extends StatelessWidget {
   void Function()? toggleRegistered;
 
-  LoginPage({super.key, required this.toggleRegistered});
+  RegisterPage({super.key, required this.toggleRegistered});
 
   @override
   Widget build(BuildContext context) {
     //controllers
     final TextEditingController emailController = TextEditingController();
     final TextEditingController pwController = TextEditingController();
+    final TextEditingController confirmPwController = TextEditingController();
 
     //signIn function
-    void signIn(BuildContext context) async {
+    void signUp(BuildContext context) async {
       //get auth service
       AuthService authService = AuthService();
 
@@ -69,19 +70,13 @@ class LoginPage extends StatelessWidget {
                   obscureText: true,
                   hintText: "Password",
                 ),
-
-                //reset password
-                Padding(
-                  padding: const EdgeInsets.only(right: 25.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      TextButton(
-                        onPressed: () {},
-                        child: Text("Forgot Password?"),
-                      ),
-                    ],
-                  ),
+                SizedBox(
+                  height: 10,
+                ),
+                MyInputBox(
+                  controller: confirmPwController,
+                  obscureText: true,
+                  hintText: "Confirm Password",
                 ),
 
                 SizedBox(
@@ -90,8 +85,8 @@ class LoginPage extends StatelessWidget {
 
                 //sign in button
                 MyButton(
-                  text: "Sign In",
-                  onTap: () => signIn(context),
+                  text: "Sign Up",
+                  onTap: () => signUp(context),
                 ),
                 SizedBox(
                   height: 25,
@@ -101,14 +96,14 @@ class LoginPage extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Don't have an account?"),
+                    Text("Already registered?"),
                     SizedBox(
                       width: 5,
                     ),
                     GestureDetector(
                       onTap: toggleRegistered,
                       child: Text(
-                        "Register here",
+                        "Sign In",
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ),

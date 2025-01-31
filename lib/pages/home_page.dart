@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:socialmedia/services/auth/auth_service.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -8,8 +9,28 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  //authService instance
+  AuthService auth = AuthService();
+
+  //signOut function
+  void signOut() {
+    auth.signOut();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+        appBar: AppBar(
+          title: Text('Home Page'),
+          centerTitle: true,
+          actions: [
+            IconButton(icon: Icon(Icons.logout), onPressed: signOut),
+          ],
+        ),
+        body: SingleChildScrollView(
+            child: Center(
+                child: Column(
+          children: [Text("data")],
+        ))));
   }
 }
