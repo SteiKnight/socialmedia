@@ -22,6 +22,9 @@ class MyInputBox extends StatelessWidget {
         decoration: InputDecoration(
           border: OutlineInputBorder(),
           hintText: hintText,
+          hintStyle: TextStyle(
+            color: Theme.of(context).colorScheme.primary,
+          ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
             borderSide:

@@ -18,7 +18,11 @@ class PostService {
         Post(post: post, uid: uid, email: email, timestamp: timestamp);
 
     //add message to the database
-    await firestore.collection('Posts').add(postItem.toMap());
+    try {
+      await firestore.collection('Posts').add(postItem.toMap());
+    } on FirebaseException catch (e) {
+      throw Exception(e.code);
+    }
   }
 
   //get posts by user
@@ -27,12 +31,14 @@ class PostService {
     return firestore
         .collection('Posts')
         .where('uid', isEqualTo: uid)
-        .orderBy(
-          'timestamp',
-          descending: true,
-        )
+        .orderBy('timestamp', descending: true)
         .snapshots()
-        .map((snapshot) {
+        .handleError((error) {
+      if (error is FirebaseException && error.code == 'failed-precondition') {
+        // Handle the error by providing a link to create the index
+        print('Firestore index required: https://console.firebase.google.com/');
+      }
+    }).map((snapshot) {
       return snapshot.docs.map((doc) {
         final post = doc.data();
         return post;

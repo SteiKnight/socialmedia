@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:socialmedia/components/my_post_tile.dart';
+import 'package:socialmedia/components/post_board.dart';
 import 'package:socialmedia/services/auth/auth_service.dart';
+import 'package:socialmedia/services/posts/post_service.dart';
 
 class ProfilePage extends StatelessWidget {
-  const ProfilePage({super.key});
+  ProfilePage({super.key});
+
+  // post services
+  PostService postServices = PostService();
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +56,13 @@ class ProfilePage extends StatelessWidget {
             Text(
               authService.getCurrentUser!.email!,
             ),
+
+            SizedBox(
+              height: 25,
+            ),
+
             // Posts
+            PostBoard(stream: postServices.getPostsByUser()),
           ],
         ),
       ),
