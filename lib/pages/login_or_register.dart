@@ -11,7 +11,7 @@ class LoginOrRegister extends StatefulWidget {
 
 class _LoginOrRegisterState extends State<LoginOrRegister> {
   //variable to keep track of the current page
-  bool registered = false;
+  bool registered = true;
 
   //function to toggle between login and register page
   void toggleRegistered() {
